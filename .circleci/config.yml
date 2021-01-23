@@ -1,4 +1,4 @@
-varsion:2.1
+varsion: 2.1
 jobs:
   build:
     docker:
