@@ -10,7 +10,9 @@ jobs:
       - run: 
           working_directory: laravel
           command: composer install -n --prefer-dist
-      - run: npm ci
+      - run:
+          working_directory: laravel
+          command: npm ci
       - run: npm run dev
       - run:
           name: php test
