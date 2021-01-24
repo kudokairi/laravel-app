@@ -17,5 +17,6 @@ jobs:
           working_directory: laravel
           command: npm run dev
       - run:
+          working_directory: laravel
           name: php test
           command: vendor/bin/phpunit
