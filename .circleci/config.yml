@@ -1,11 +1,12 @@
 varsion: 2.1
 jobs:
   build:
-    working_directory: laravel
     docker:
       - image: circleci/php:7.3-node-browsers
     steps:
       - checkout
+      - run: 
+        working_directory: laravel
       - run: ls
       - run: sudo composer self-update --1
       - run: composer install -n --prefer-dist
