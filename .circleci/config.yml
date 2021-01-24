@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run: 
-        working_directory: laravel
+          working_directory: laravel
       - run: ls
       - run: sudo composer self-update --1
       - run: composer install -n --prefer-dist
