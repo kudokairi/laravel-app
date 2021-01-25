@@ -5,11 +5,16 @@ jobs:
       - image: circleci/php:7.3-node-browsers
     steps:
       - checkout
-      - run: ls
       - run: sudo composer self-update --1
+      - restore_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
       - run: 
           working_directory: laravel
           command: composer install -n --prefer-dist
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
+          path:
+              - vendor
       - run:
           working_directory: laravel
           command: npm ci
