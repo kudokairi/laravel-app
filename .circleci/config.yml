@@ -45,11 +45,11 @@ jobs:
           working_directory: laravel
           command: npm run dev
       - run:
-          name: get ready for psotgres
+          name: get ready for postgres
           command: |
               sudo apt-get update
               sudo apt-get install libpq-dev
-              sudo docker-php-ext-install pd_pgsql
+              sudo docker-php-ext-install pdo_pgsql
               dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           working_directory: laravel
