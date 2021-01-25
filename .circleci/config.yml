@@ -25,3 +25,7 @@ jobs:
           working_directory: laravel
           name: php test
           command: vendor/bin/phpunit
+      - run:
+          working_directory: laravel
+          command: ls
+
