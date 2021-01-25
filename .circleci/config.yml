@@ -12,9 +12,10 @@ jobs:
           working_directory: laravel
           command: composer install -n --prefer-dist
       - save_cache:
+          working_directory: laravel
           key: composer-v1-{{ checksum "composer.lock" }}
           path:
-            - laravel/vendor
+            - vendor
       - run:
           working_directory: laravel
           command: npm ci
