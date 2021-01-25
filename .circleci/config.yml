@@ -15,7 +15,7 @@ jobs:
           working_directory: laravel
           key: composer-v1-{{ checksum "composer.lock" }}
           path:
-              - vendor
+              - laravel/vendor
       - run:
           working_directory: laravel
           command: npm ci
