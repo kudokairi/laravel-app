@@ -66,6 +66,7 @@ jobs:
           command: |
             ssh -o StrictHostKeyChecking=no -t webapp@${HOST_NAME} "cd laravel-app && \
             git pull origin master && \
+            cd laravel $$ \
             composer install -n --no-dev --prefer-dist && \
             npm ci && \
             npm run prod && \
