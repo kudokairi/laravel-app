@@ -87,7 +87,9 @@ jobs:
       - run:
           name: archive artifacts
           command: zip -ryq laravel-ci.zip .
-      - aws-cli/install
+      - run:
+          name: awscli_install
+          command: sudo pip install awscli
       - run:
           name: upload artifacts to s3
           command: aws s3 cp laravel-ci.zip s3://${AWS_S3_BUCKET_NAME}
@@ -95,8 +97,8 @@ jobs:
           name: deploy to prod
           command: |
             aws deploy create-deployment \
-            --application-name laravel-app
-            --deployment-group-name laravel-app
+            --application-name laravel-app \
+            --deployment-group-name laravel-app \
             --s3-location bucket=${AWS_S3_BUCKET_NAME},key=laravel-ci.zip,bundleType=zip
 
 orbs:
