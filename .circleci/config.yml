@@ -93,7 +93,7 @@ jobs:
           name: archive artifacts
           command: zip -ryq laravel-ci.zip .
       - run: wget https://bootstrap.pypa.io/get-pip.py 
-      - run: sudo python get-pip.py |
+      - run: sudo python get-pip.py
       - run: sudo apt-get install python-dev
       - run: sudo pip install awscli
       - run:
