@@ -99,8 +99,8 @@ jobs:
           command: zip -ryq laravel-ci.zip .
       - run:
           command: |
-            sudo apt update \
-            sudo apt -y install python python-pip python-dev build-essential \
+            sudo apt update
+            sudo apt -y install python python-pip python-dev build-essential
             pip install awscli
       - run:
           name: upload artifacts to s3
