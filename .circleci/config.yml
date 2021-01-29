@@ -66,7 +66,9 @@ jobs:
       - run: sudo composer self-update --1
       - restore_cache:
           key: composer-no-dev-v1-{{ checksum "laravel/composer.lock" }}
-      - run: composer install -n --no-dev --prefer-dist
+      - run:
+          working_directory: laravel
+          command: composer install -n --no-dev --prefer-dist
       - save_cache:
           key: composer-no-dev-v1-{{ checksum "laravel/composer.lock" }}
           paths:
@@ -74,6 +76,7 @@ jobs:
       - restore_cache:
           key: npm-v1-{{ checksum "laravel/package.json" }}
       - run:
+          working_directory: laravel
           name: npm ci
           command: |
             if [ ! -d node_modules ]; then
@@ -83,7 +86,9 @@ jobs:
           key: npm-v1-{{ checksum "laravel/package-lock.json" }}
           paths:
             - laravel/node_modules
-      - run: npm run prod
+      - run: 
+          working_directory: laravel
+          name: npm run prod
       - run:
           name: archive artifacts
           command: zip -ryq laravel-ci.zip .
