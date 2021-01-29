@@ -55,7 +55,6 @@ jobs:
           working_directory: laravel
           name: php test
           command: vendor/bin/phpunit
-
   deploy:
     docker:
       - image: circleci/php:7.3-node-browsers
