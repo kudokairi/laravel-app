@@ -55,6 +55,7 @@ jobs:
           working_directory: laravel
           name: php test
           command: vendor/bin/phpunit
+
   deploy:
     docker:
       - image: circleci/php:7.3-node-browsers
@@ -84,8 +85,8 @@ jobs:
             - laravel/node_modules
       - run: npm run prod
       - run:
-        name: archive artifacts
-        command: zip -ryq laravel-ci.zip .
+          name: archive artifacts
+          command: zip -ryq laravel-ci.zip .
       - aws-cli/install
       - run:
           name: upload artifacts to s3
