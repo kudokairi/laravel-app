@@ -92,6 +92,10 @@ jobs:
       - run:
           name: archive artifacts
           command: zip -ryq laravel-ci.zip .
+      - run: wget https://bootstrap.pypa.io/get-pip.py 
+      - run: sudo python get-pip.py |
+      - run: sudo apt-get install python-dev
+      - run: sudo pip install awscli
       - run:
           name: upload artifacts to s3
           command: aws s3 cp laravel-ci.zip s3://${AWS_S3_BUCKET_NAME}
