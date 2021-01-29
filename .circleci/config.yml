@@ -1,8 +1,4 @@
 varsion: 2.1
-
-orbs:
-  aws-cli: circleci/aws-cli@1.0.0
-
 jobs:
   build:
     docker:
@@ -107,6 +103,9 @@ jobs:
             --application-name laravel-app \
             --deployment-group-name laravel-app \
             --s3-location bucket=${AWS_S3_BUCKET_NAME},key=laravel-ci.zip,bundleType=zip
+            
+orbs:
+  aws-cli: circleci/aws-cli@1.0.0
 
 workflows:
   version: 2
