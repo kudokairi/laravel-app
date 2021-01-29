@@ -98,7 +98,10 @@ jobs:
           name: archive artifacts
           command: zip -ryq laravel-ci.zip .
       - run:
-          command: unzip -l laravel-ci.zip
+          command: 
+            cd laravel
+            zip -ryq ../laravel-ci.zip .
+            unzip -l laravel-ci.zip
       - run:
           command: |
             sudo apt update
