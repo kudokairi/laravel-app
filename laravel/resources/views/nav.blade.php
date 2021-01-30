@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand navbar-dark blue-gradient">
 
-  <a class="navbar-brand" href="/"><i class="far fa-sticky-note mr-1"></i>memo</a>
+  <a class="navbar-brand" href="/"><i class="far fa-sticky-note mr-1"></i>SNSHU</a>
 
-  <ul class="navbar-nav ml-auto">
+  <ul class="navbar-nav ml-auto d-flex align-items-center justify-content-center">
 
     @guest
     <li class="nav-item">
@@ -15,10 +15,17 @@
       <a class="nav-link" href="{{ route('login') }}">ログイン</a>
     </li>
     @endguest
-
+    <li class="nav-item">
+      <form method="GET" class="form-inline mb-0" action="{{ route('search') }}">
+        <div class="form-group mb-0">
+        <input type="search" class="form-control" aria-label="Search" name="keyWord" placeholder="キーワード検索">
+        </div>
+        <input type="submit" value="検索" class="d-none d-md-inline btn btn-info">
+      </form>
+    </li>
     @auth
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('articles.create') }}"><i class="fas fa-pen mr-1"></i>投稿する</a>
+      <a class="nav-link" href="{{ route('articles.create') }}"><i class="fas fa-pen mr-1"></i><div class="d-none d-md-inline">投稿する</div></a>
     </li>
     @endauth
 
@@ -47,5 +54,4 @@
     @endauth
 
   </ul>
-
 </nav>
