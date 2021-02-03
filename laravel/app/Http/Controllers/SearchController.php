@@ -11,7 +11,7 @@ class SearchController extends Controller
     {
         $keyWord = $request->input('keyWord');
 
-        $articles = Article::where('title','like','%'.$keyWord.'%')->get()->sortByDesc('created_at')
+        $articles = optional(Article::where('title','like','%'.$keyWord.'%'))->get()->sortByDesc('created_at')
             ->load('user', 'tags', 'likes');
 
         return view('articles.index', ['articles' => $articles]);
