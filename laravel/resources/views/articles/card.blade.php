@@ -91,9 +91,6 @@
             {{ $tag->hashtag }}
           </a>
         </div>
-      @if($loop->last)
-    </div>
-      @endif
     @endforeach
-    </div>
+  </div>
 </div>
