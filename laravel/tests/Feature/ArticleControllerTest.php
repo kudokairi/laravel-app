@@ -26,14 +26,4 @@ class ArticleControllerTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    public function testAuthCreate()
-    {
-        $user = factory(User::class)->create();
-
-        $response = $this->actingAs($user)
-            ->get(route('articles.create'));
-
-        $response->assertStatus(200)
-            ->assertViewIs('articles.create');
-    }
 }
