@@ -151,4 +151,6 @@ return [
         'password' => 'パスワード',
     ],
 
+    'cognito_user_unique' => '指定されたメールアドレスのユーザーは既に存在します',
+
 ];
