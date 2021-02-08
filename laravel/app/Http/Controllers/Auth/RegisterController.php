@@ -7,11 +7,9 @@ use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Auth\AuthManager;
-use App\Rules\CognitoUserUniqueRule;
-use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -35,18 +33,14 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    private $AuthManager;
-
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(AuthManager $AuthManager)
+    public function __construct()
     {
         $this->middleware('guest');
-
-        $this->AuthManager = $AuthManager;
     }
 
     /**
@@ -59,11 +53,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'alpha_num', 'min:3', 'max:16', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'cognito_user_unique'],
-            'password' => [
-                'required', 'string', 'min:8', 'confirmed',
-                'regex:/\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}+\z/'
-            ],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
