@@ -11,10 +11,12 @@ class SearchController extends Controller
     {
         $keyWord = $request->input('keyWord');
 
-        $articles = optional(Article::where('title','like','%'.$keyWord.'%'))->get()->sortByDesc('created_at')
-            ->load('user', 'tags', 'likes');
+        $articles = optional(Article::whereHas('user',function($query) {
+            $query->where('deleted_at',NULL);
+        })
+        ->where('title','like','%'.$keyWord.'%'))->get()->sortByDesc('created_at')
+        ->load('user', 'tags', 'likes');
 
         return view('articles.index', ['articles' => $articles]);
     }
-
 }

@@ -37,6 +37,37 @@
       <form id="logout-button" method="POST" action="{{ route('logout') }}">
       @csrf
       </form>
+      @auth
+      <li>
+        <a class="dropdown-item text-danger py-3 font-weight-bold" data-toggle="modal" data-target="#modal-withdrawal-{{ Auth::user()->id }}">
+          退会する
+        </a>
+      </li>
+            <!-- modal -->
+      <div id="modal-withdrawal-{{ Auth::user()->id }}" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form method="POST" action="{{ route('users.withdrawal') }}">
+              @csrf
+              @method('DELETE')
+              <div class="modal-body">
+                {{ Auth::user()->name }}の退会処理を実行します。よろしいですか？
+              </div>
+              <div class="modal-footer justify-content-between">
+                <a class="btn btn-outline-grey" data-dismiss="modal">キャンセル</a>
+                <button type="submit" class="btn btn-danger">退会する</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- modal -->
+      @endauth
     </ul>
   </div>
 </nav>
