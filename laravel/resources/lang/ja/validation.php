@@ -42,6 +42,7 @@ return [
     'email'                => ':attributeには、有効なメールアドレスを指定してください。',
     'ends_with'            => ':attributeには、:valuesのどれかで終わる値を指定してください。',
     'exists'               => '選択された:attributeは正しくありません。',
+    'exists_soft_delete'   => '選択された:attributeは、有効ではありません。',
     'file'                 => ':attributeにはファイルを指定してください。',
     'filled'               => ':attributeに値を指定してください。',
     'gt'                   => [

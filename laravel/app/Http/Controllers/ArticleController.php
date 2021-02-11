@@ -16,8 +16,9 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = Article::all()->sortByDesc('created_at')
-            ->load('user', 'tags', 'likes');
+        $articles = Article::whereHas('user',function($query) {
+            $query->where('deleted_at',NULL);
+        })->get()->sortByDesc('created_at')->load('user', 'tags', 'likes');
 
         return view('articles.index', ['articles' => $articles]);
     }
