@@ -7,7 +7,7 @@
       <div class="font-weight-bold">
         <a href="{{ route('users.show', ['name' => $article->user->name]) }}" class="text-dark">  
           {{ $article->user->name }}
-        </a>  
+        </a>
       </div>      
       <div class="font-weight-lighter">{{ $article->created_at->format('Y/m/d H:i') }}</div>
     </div>
@@ -82,6 +82,14 @@
       endpoint="{{ route('articles.like', ['article' => $article]) }}"
     >
     </article-like>
+    <h4 class="h5 card-title">
+      <a href="{{ route('replies.create', ['article' => $article]) }}" class="text-dark ml-3">
+        <i class="far fa-comment mr-2"></i>
+      </a>
+    </h4>
+    <a href="{{ route('articles.show', ['article' => $article]) }}" class="text-dark">
+    {{ $article->replies->count() }}
+    </a>
     @foreach($article->tags as $tag)
       @if($loop->first)
         <div class="ml-auto"></div>
