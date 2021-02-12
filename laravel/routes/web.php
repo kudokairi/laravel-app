@@ -38,4 +38,8 @@ Route::prefix('users')->name('users.')->group(function() {
         Route::delete('/withdrawal', 'UserController@withdrawalUser')->name('withdrawal');
     });
 });
-Route::get('search', 'SearchController@index')->name('search');
+Route::middleware('auth')->group(function () {
+    Route::get('/replies/{article}', 'ReplyController@create')->name('replies.create');
+    Route::post('/replies', 'ReplyController@store')->name('replies.store');
+});
+Route::get('/search', 'SearchController@index')->name('search');
