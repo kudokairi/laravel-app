@@ -53,7 +53,9 @@ class UserController extends Controller
         $user = User::where('name', $name)->first()
             ->load(['likes.user', 'likes.likes', 'likes.tags']);
 
-        $articles = $user->likes->sortByDesc('created_at');
+        $withdrawalUser = User::onlyTrashed()->get('id')->pluck('id');
+
+        $articles = $user->likes->whereNotIn('user_id', $withdrawalUser)->sortByDesc('created_at');
 
         return view('users.likes', [
             'user' => $user,
