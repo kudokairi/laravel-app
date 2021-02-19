@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -20,6 +20,21 @@ class UserController extends Controller
             'user' => $user, 
             'articles' => $articles,
         ]);
+    }
+
+    public function uplopad(Request $request){
+		$upload_image = $request->file;
+
+		if($upload_image) {
+			$path = $upload_image->store('uploads',"public");
+			if($path){
+                $user = User::where('id', Auth::id())->first();
+				$user->file_path = $path;
+                $user->save();
+                $articles = $user->articles->sortByDesc('created_at');
+			}
+		}
+        return Storage::url($user->file_path);
     }
 
     public function followings(string $name)

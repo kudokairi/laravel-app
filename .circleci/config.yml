@@ -45,6 +45,9 @@ jobs:
           working_directory: laravel
           command: npm run dev
       - run:
+          working_directory: laravel
+          command: php artisan storage:link
+      - run:
           name: get ready for postgres
           command: |
               sudo apt-get update
@@ -89,6 +92,9 @@ jobs:
       - run: 
           working_directory: laravel
           command: npm run prod
+      - run:
+          working_directory: laravel
+          command: php artisan storage:link
       - run:
           name: archive artifacts
           command: zip -ryq laravel-ci.zip .

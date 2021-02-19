@@ -1,9 +1,18 @@
 <div class="card mt-3">
   <div class="card-body d-flex flex-row">
     <a href="{{ route('users.show' , ['name' => $article->user->name]) }}" class="text-dark">
-    <i class="fas fa-user-circle fa-3x mr-1"></i>
+    @if( empty($article->user->file_path) )
+    <i class="fas fa-user-circle fa-3x ml-3"></i>
+    @else
+    <div style="width: 4rem; float:left;">
+      <profile-image
+        :initial-file-path = '@json(Storage::url($article->user->file_path))'
+      >
+      </profile-image>
+    </div>
+    @endif
     </a>
-    <div>
+    <div class="ml-4">
       <div class="font-weight-bold">
         <a href="{{ route('users.show', ['name' => $article->user->name]) }}" class="text-dark">  
           {{ $article->user->name }}

@@ -36,6 +36,7 @@ Route::prefix('users')->name('users.')->group(function() {
         Route::put('/{name}/follow', 'UserController@follow')->name('follow');
         Route::delete('/{name}/follow', 'UserController@unfollow')->name('unfollow');
         Route::delete('/withdrawal', 'UserController@withdrawalUser')->name('withdrawal');
+        Route::post('/upload', 'UserController@uplopad')->name('upload_image');
     });
 });
 Route::middleware('auth')->group(function () {
