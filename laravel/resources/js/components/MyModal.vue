@@ -7,7 +7,7 @@
     <p>{{ message }}</p>
 
     <div id="overlay" v-show="showContent">
-        <div id="content">
+        <div id="content" class="w-50">
           <p class="text-center small d-block d-sm-none small">プロフィールを下記画像に設定しますか？</p>
           <p class="text-center d-none d-sm-block">プロフィールを下記画像に設定しますか？</p>
           <img :src="uploadedImage" class="w-50 h-50 d-block mx-auto">
@@ -41,7 +41,11 @@
     },
     methods: {   
       closeModal: function(){
-        this.showContent = false
+        this.files = '';
+        this.type = '';
+        var obj = document.getElementById("lefile");
+        obj.value = "";
+        this.showContent = false;
       },
 
       onFileChange(e) {
@@ -98,13 +102,17 @@
 
             };
             img.src = e.target.result;
+            console.log(img.src);
             this.uploadedImage = e.target.result;
+            console.log(this.uploadedImage);
         };
       },
 
       async upload_image() {
         const data = new FormData();
         data.append("file", this.imageFile);
+        console.log(data);
+        console.log(this.endpoint);
         const response = await axios.post(this.endpoint,data);
         const items = response.data;
         const imgProfile = document.getElementsByClassName("imgProfile");
